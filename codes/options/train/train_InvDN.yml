@@ -4,7 +4,7 @@
 name: InvDN_ResUnit_x4
 use_tb_logger: true
 model: InvDN
-scale: 4
+scale: 2
 gpu_ids: [0]
 
 
@@ -14,7 +14,7 @@ datasets:
   train:
     name: SIDD
     mode: LQGTRN
-    dataroot_GT: '' # path to training Clean images
+    dataroot_GT: '/content/data/Train' # path to training Clean images
     dataroot_Noisy: '' # path to training Noisy images
     dataroot_LQ: ~ # path to training reference LR images, not necessary, if not provided, LR images will be generated in dataloader
 
