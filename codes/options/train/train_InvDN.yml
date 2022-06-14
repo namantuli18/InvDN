@@ -14,7 +14,7 @@ datasets:
   train:
     name: SIDD
     mode: LQGTRN
-    dataroot_GT: 'data/Train' # path to training Clean images
+    dataroot_GT: '/content/data/Train' # path to training Clean images
     dataroot_Noisy: '' # path to training Noisy images
     dataroot_LQ: ~ # path to training reference LR images, not necessary, if not provided, LR images will be generated in dataloader
 
