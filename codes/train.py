@@ -220,20 +220,20 @@ def main():
                     denoised_img = denoised_img / 255.
                     cropped_denoised_img = denoised_img[crop_size:-crop_size, crop_size:-crop_size, :]
                     cropped_gt_img = gt_img[crop_size:-crop_size, crop_size:-crop_size, :]
-                    print(cropped_denoised_img.shape)
-                    print(cropped_gt_img.shape)
-                    avg_psnr += util.calculate_psnr(cropped_denoised_img * 255, cropped_gt_img * 255)
+#                     print(cropped_denoised_img.shape)
+#                     print(cropped_gt_img.shape)
+#                     avg_psnr += util.calculate_psnr(cropped_denoised_img * 255, cropped_gt_img * 255)
 
-                avg_psnr = avg_psnr / idx
+#                 avg_psnr = avg_psnr / idx
 
-                log
-                logger.info('# Validation # PSNR: {:.4e}.'.format(avg_psnr))
-                logger_val = logging.getLogger('val')  # validation logger
-                logger_val.info('<epoch:{:3d}, iter:{:8,d}> psnr: {:.4e}.'.format(
-                    epoch, current_step, avg_psnr))
-#                 tensorboard logger
-                if opt['use_tb_logger'] and 'debug' not in opt['name']:
-                    tb_logger.add_scalar('psnr', avg_psnr, current_step)
+#                 log
+#                 logger.info('# Validation # PSNR: {:.4e}.'.format(avg_psnr))
+#                 logger_val = logging.getLogger('val')  # validation logger
+#                 logger_val.info('<epoch:{:3d}, iter:{:8,d}> psnr: {:.4e}.'.format(
+#                     epoch, current_step, avg_psnr))
+# #                 tensorboard logger
+#                 if opt['use_tb_logger'] and 'debug' not in opt['name']:
+#                     tb_logger.add_scalar('psnr', avg_psnr, current_step)
 
             #### save models and training states
             if current_step % opt['logger']['save_checkpoint_freq'] == 0:
