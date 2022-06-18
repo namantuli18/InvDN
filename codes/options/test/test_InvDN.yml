@@ -8,13 +8,13 @@ self_ensemble: True
 
 datasets:
   test_1:  # the 1st test dataset
-    name: SIDD
+    name: SET14
     mode: LQGTRN
-    dataroot_Noisy: '' # path to test Noisy images
+    dataroot_Noisy: '/content/testing/bsds100/benchmark/Set5/LR_bicubic/X4' # path to test Noisy images
   test_2:  # the 2nd test dataset
-    name: DND
+    name: BSDS100
     mode: LQGTRN
-    dataroot_Noisy: '' # path to test Noisy images
+    dataroot_Noisy: '/content/testing/bsds100/benchmark/Set5/LR_bicubic/X4' # path to test Noisy images
 
 #### network
 network_G:
@@ -29,4 +29,4 @@ network_G:
 
 #### path
 path:
-  pretrain_model_G: ""
+  pretrain_model_G: "/content/InvDN/experiments/InvDN_ResUnit_x4/models/551_G.pth"
