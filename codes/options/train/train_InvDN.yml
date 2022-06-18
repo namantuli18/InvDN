@@ -4,7 +4,7 @@
 name: InvDN_ResUnit_x4
 use_tb_logger: true
 model: InvDN
-scale: 2
+scale: 4
 gpu_ids: [0]
 
 
