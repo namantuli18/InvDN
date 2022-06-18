@@ -29,8 +29,8 @@ datasets:
   val:
     name: SIDD_val
     mode: LQGTRN
-    dataroot_GT: '' # path to validation Clean images
-    dataroot_Noisy: '' # path to validation Noisy images
+    dataroot_GT: '/content/valid/Validation/HR' # path to validation Clean images
+    dataroot_Noisy: '/content/valid/Validation/LR_x4' # path to validation Noisy images
     dataroot_LQ: ~ # path to validation reference LR images, not necessary, if not provided, LR images will be generated in dataloader
 
 
