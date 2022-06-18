@@ -16,7 +16,7 @@ datasets:
     mode: LQGTRN
     dataroot_GT: '/content/data/Train/HR' # path to training Clean images
     dataroot_Noisy: '/content/data/Train/LR_x4' # path to training Noisy images
-    dataroot_LQ: '/content/data/Train/LR_x4' ~ # path to training reference LR images, not necessary, if not provided, LR images will be generated in dataloader
+    dataroot_LQ: ~ # path to training reference LR images, not necessary, if not provided, LR images will be generated in dataloader
 
     use_shuffle: true
     n_workers: 6  # per GPU
