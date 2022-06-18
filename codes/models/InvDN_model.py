@@ -112,7 +112,8 @@ class InvDN_Model(BaseModel):
         self.output = self.netG(x=self.noisy_H)
 
         LR_ref = self.ref_L.detach()
-
+        print(self.output[:, :3, :, :].shape)
+        print(LR_ref.shape)
         l_forw_ce = 0
         l_forw_fit = self.loss_forward(self.output[:, :3, :, :], LR_ref)
 
