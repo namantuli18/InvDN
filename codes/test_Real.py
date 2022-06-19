@@ -153,13 +153,62 @@ def DND_submissions_srgb(submission_folder):
                      "israw": israw,
                      "eval_version": eval_version},
                     )
+        
+def BSDS_test(model, opt):
+    dataset_dir = opt['name']
+
+    out_dir = os.path.join('../experiments', dataset_dir)
+    print(out_dir)
+    if not os.path.exists(out_dir):
+        os.mkdir(out_dir)
+    out_dir = os.path.join(out_dir, 'SIDD_test')
+    if not os.path.exists(out_dir):
+        os.mkdir(out_dir)
+    imgArray=[]
+    for files in os.listdir(opt['datasets']['test_1']['dataroot_Noisy']):
+        imgArray.append(os.path.join(opt['datasets']['test_1']['dataroot_Noisy'],files))
+    nImages = len(imgArray)
+    print(nImages)
+    print(imgArray[0])
+    # load info
+#     files = scipy.io.loadmat(os.path.join(opt['datasets']['test_1']['dataroot_Noisy'], 'BenchmarkNoisyBlocksSrgb.mat'))
+#     imgArray = files['BenchmarkNoisyBlocksSrgb']
+#     nImages = 40
+    nBlocks = imgArray.shape[1]
+    DenoisedBlocksSrgb = np.empty_like(imgArray)
+    # process data
+    for i in range(nImages):
+        Inoisy = read_img_array(imgArray[i])
+        Inoisy = torch.from_numpy(np.transpose(Inoisy, (0, 3, 1, 2))).type(torch.FloatTensor)
+
+        for k in range(nBlocks):
+            data = Inoisy[k].unsqueeze(dim=0)
+            model.feed_test_data(data)
+            if opt['self_ensemble']:
+                model.test(opt['self_ensemble'])
+            elif opt['mc_ensemble']:
+                model.MC_test()
+            else:
+                model.test()
+
+            img = model.fake_H.detach().float().cpu()
+            Idenoised_crop = util.tensor2img_Real(img)  # uint8
+            Idenoised_crop = np.transpose(Idenoised_crop, (1, 2, 0))
+            DenoisedBlocksSrgb[i][k] = Idenoised_crop
+
+            save_file = os.path.join(out_dir, '%d_%02d.PNG' % (i , k))
+            cv2.imwrite(save_file, cv2.cvtColor(Idenoised_crop, cv2.COLOR_RGB2BGR))
+            print('[%d/%d] is done\n' % (i+1, 40))
+
+    save_file = os.path.join(out_dir, 'SubmitSrgb.mat') # SIDD_test_output
+    sio.savemat(save_file, {'DenoisedBlocksSrgb': DenoisedBlocksSrgb, 'TimeMPSrgb' : 0.0})
 
 def main():
     model = create_model(opt)
-    SIDD_test(model, opt)
-    DND_test(model, opt)
-    submission_folder = os.path.join('../experiments', opt['name'], 'DND_test', 'Submit')
-    DND_submissions_srgb(submission_folder)
+#     SIDD_test(model, opt)
+#     DND_test(model, opt)
+#     submission_folder = os.path.join('../experiments', opt['name'], 'DND_test', 'Submit')
+#     DND_submissions_srgb(submission_folder)
 
 if __name__ == "__main__":
     main()
