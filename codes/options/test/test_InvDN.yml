@@ -29,4 +29,4 @@ network_G:
 
 #### path
 path:
-  pretrain_model_G: "/content/InvDN/experiments/InvDN_ResUnit_x4/models/551_G.pth"
+  pretrain_model_G: "/content/drive/MyDrive/Super Resolution/experiments/InvDN_ResUnit_x4/models/131_G.pth"
