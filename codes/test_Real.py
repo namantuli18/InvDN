@@ -178,7 +178,7 @@ def BSDS_test(model, opt):
     DenoisedBlocksSrgb = np.empty_like(imgArray)
     # process data
     for i in range(nImages):
-        Inoisy = read_img_array(imgArray[i])
+        Inoisy = cv2.imread(imgArray[i])
         Inoisy = torch.from_numpy(np.transpose(Inoisy, (0, 3, 1, 2))).type(torch.FloatTensor)
 
         for k in range(nBlocks):
