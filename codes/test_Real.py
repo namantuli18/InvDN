@@ -174,7 +174,7 @@ def BSDS_test(model, opt):
 #     files = scipy.io.loadmat(os.path.join(opt['datasets']['test_1']['dataroot_Noisy'], 'BenchmarkNoisyBlocksSrgb.mat'))
 #     imgArray = files['BenchmarkNoisyBlocksSrgb']
 #     nImages = 40
-    nBlocks = imgArray[0].shape[1]
+    nBlocks = 1
     DenoisedBlocksSrgb = np.empty_like(imgArray)
     # process data
     for i in range(nImages):
