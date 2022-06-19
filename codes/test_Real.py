@@ -205,6 +205,7 @@ def BSDS_test(model, opt):
 
 def main():
     model = create_model(opt)
+    BSDS_test(model,opt)
 #     SIDD_test(model, opt)
 #     DND_test(model, opt)
 #     submission_folder = os.path.join('../experiments', opt['name'], 'DND_test', 'Submit')
